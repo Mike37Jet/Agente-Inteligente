@@ -6,9 +6,8 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
 import modelos.Cliente;
 
-public class Agente4  extends Agent {
+public class Agente4 extends Agent {
     boolean enviado = true;
-
 
     @Override
     protected void setup() { // Dar vida al Agente
@@ -24,18 +23,17 @@ public class Agente4  extends Agent {
     class Comportamiento extends CyclicBehaviour {
         @Override
         public void action() { // Accion que realizara de forma acíclica.
+            ACLMessage aclmsj = blockingReceive();
+            Cliente cliente = null;
             try {
-                ACLMessage aclmsj = blockingReceive();
-                Cliente cliente = (Cliente) aclmsj.getContentObject();
-                if(enviado){
+                cliente = (Cliente) aclmsj.getContentObject();
+                if (enviado) {
                     cliente.setEdad(cliente.getEdad() + 1);
                     Comunicacion.msj(ACLMessage.REQUEST, getAgent(), "Ag2", null, cliente, "CD:Ag4->Ag2");
                     enviado = false;
-                }else {
+                } else {
                     Comunicacion.msj(ACLMessage.INFORM, getAgent(), "Ag3", null, cliente, "CD:Ag4->Ag3");
                 }
-
-
             } catch (UnreadableException e) {
                 throw new RuntimeException(e);
             }

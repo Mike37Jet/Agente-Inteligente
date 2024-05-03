@@ -22,7 +22,8 @@ public class Agente1 extends Agent {
         @Override
         public void action() { // Accion que realizara de forma acíclica.
             System.out.println(getName());
-            Comunicacion.msj(ACLMessage.INFORM, getAgent(), "Ag2", null, new Cliente("Miguel", "Mendosa", "miguel.mendosa@epn.edu.ec", "2300163678", 959662882, 21), "CD:Ag1->Ag2");
+            Comunicacion.msj(ACLMessage.INFORM, getAgent(), "Ag2", null, new Cliente("Miguel", "Mendosa",
+                    "miguel.mendosa@epn.edu.ec", "2300163678", 959662882, 21), "CD:Ag1->Ag2");
             blockingReceive();
         }
     }

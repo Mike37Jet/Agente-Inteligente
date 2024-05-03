@@ -24,8 +24,6 @@ public class Contenedor {
         } catch (StaleProxyException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
 }

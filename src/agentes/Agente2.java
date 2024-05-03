@@ -23,11 +23,11 @@ public class Agente2 extends Agent {
         @Override
         public void action() { // Accion que realizara de forma acíclica.
             ACLMessage aclmsj = blockingReceive(); // Se mantiene bloqueado, despues recive un mesaje y lo guarda.
-            Cliente cliente = null;
             try {
                 // if(aclmsj.getSender().getName().equals("Ag1")){}
+                Cliente cliente = (Cliente) aclmsj.getContentObject();
                 if (aclmsj.getConversationId().equals("CD:Ag1->Ag2")) {
-                    cliente = (Cliente) aclmsj.getContentObject();
+
                     cliente.setEdad(cliente.getEdad() + 1);
                     Comunicacion.msj(ACLMessage.REQUEST, getAgent(), "Ag5", null, cliente, "CD:Ag2->Ag5");
                 } else if (aclmsj.getConversationId().equals("CD:Ag5->Ag2")) {
@@ -35,8 +35,6 @@ public class Agente2 extends Agent {
                 } else if (aclmsj.getConversationId().equals("CD:Ag4->Ag2")) {
                     Comunicacion.msj(ACLMessage.REQUEST, getAgent(), "Ag4", null, cliente, "CD:Ag2->Ag4");
                 }
-
-
             } catch (UnreadableException e) {
                 throw new RuntimeException(e);
             }

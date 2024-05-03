@@ -22,7 +22,6 @@ public class Agente5 extends Agent {
     class Comportamiento extends CyclicBehaviour {
         @Override
         public void action() { // Accion que realizara de forma acíclica.
-
             try {
                 ACLMessage aclmsj = blockingReceive();
                 Cliente cliente = (Cliente) aclmsj.getContentObject();

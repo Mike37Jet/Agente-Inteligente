@@ -9,7 +9,7 @@ import jade.wrapper.StaleProxyException;
 import modelos.Cliente;
 
 public class Agente3 extends Agent {
-    Cliente cliente;
+    private Cliente cliente;
 
     @Override
     protected void setup() { // Dar vida al Agente
@@ -18,7 +18,7 @@ public class Agente3 extends Agent {
 
     @Override
     protected void takeDown() { // Matar al Agente
-        AgentContainer contenedorPrincipal = (jade.wrapper.AgentContainer)getArguments()[0];
+        AgentContainer contenedorPrincipal = (jade.wrapper.AgentContainer) getArguments()[0];
         try {
             contenedorPrincipal.createNewAgent("AgenteH", AgenteH.class.getName(), new Object[]{cliente, contenedorPrincipal, 1}).start();
         } catch (StaleProxyException e) {
@@ -30,10 +30,9 @@ public class Agente3 extends Agent {
     class Comportamiento extends Behaviour {
         @Override
         public void action() { // Accion que realizara de forma acíclica.
-
             try {
                 ACLMessage aclmsj = blockingReceive();
-                Cliente cliente = (Cliente) aclmsj.getContentObject();
+                cliente = (Cliente) aclmsj.getContentObject();
                 cliente.setEdad(cliente.getEdad() * 2);
                 doDelete();
             } catch (UnreadableException e) {
