@@ -12,6 +12,7 @@ public class Contenedor {
         Profile p = new ProfileImpl(host, port, name); //crear perfil
         AgentContainer contenedorPrincipal = runtime.createMainContainer(p); //se le envió el perfil al contenedor
         crearAgente(contenedorPrincipal);
+
     }
 
     private void crearAgente(AgentContainer contenedorPrincipal) {
